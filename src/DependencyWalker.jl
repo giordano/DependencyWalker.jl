@@ -13,14 +13,16 @@ struct Library{OH<:Union{ObjectHandle,Missing}}
 end
 
 function Library(path::String, level::Int = 0)
+    io = open(path, "r")
     oh = try
-        # TODO: need to close `io`
-        io = open(path, "r")
         readmeta(io)
     catch
+        close(io)
         missing
     end
-    return Library(path, oh, level, dependency_tree(oh, level))
+    lib = Library(path, oh, level, dependency_tree(oh, level))
+    isopen(io) && close(io)
+    return lib
 end
 
 Library(path::String, nil::Missing, level::Int) =
