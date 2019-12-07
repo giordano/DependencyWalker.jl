@@ -1,6 +1,6 @@
 module DependencyWalker
 
-using ObjectFile
+using ObjectFile, Crayons
 import Libdl
 
 export Library
@@ -65,8 +65,12 @@ end
 
 dependency_tree(::Missing, level) = Library[]
 
+reduce_hash(x::UInt64) = Base.hash_64_32(x)
+reduce_hash(x::UInt32) = x
+
 function Base.show(io::IO, lib::Library{<:ObjectHandle})
-    print(io, repeat("  ", lib.level), "* ", lib.path)
+    print(io, Crayon(foreground = reduce_hash(hash(lib.path))),
+          repeat("  ", lib.level), "* ", lib.path)
     for dep in lib.deps
         println(io)
         show(io, dep)
