@@ -16,13 +16,9 @@ function Library(path::String, level::Int = 0)
     oh = try
         readmeta(open(path, "r"))
     catch
-        nothing
+        missing
     end
-    if isnothing(oh)
-        return Library(path, missing, level)
-    else
-        return Library(path, oh, level, dependency_tree(oh, level))
-    end
+    return Library(path, oh, level, dependency_tree(oh, level))
 end
 
 Library(path::String, nil::Missing, level::Int) =
@@ -31,7 +27,7 @@ Library(path::String, nil::Missing, level::Int) =
 Library(path::AbstractString, handle, level) =
     Library(String(path), handle, level)
 
-function dependency_tree(oh, level)
+function dependency_tree(oh::ObjectHandle, level)
     # Get the list of needed libraries
     deps_names = keys(find_libraries(oh))
     # Get list of already dlopen'ed libraries
@@ -51,6 +47,8 @@ function dependency_tree(oh, level)
     end
     return deps
 end
+
+dependency_tree(::Missing, level) = Library[]
 
 function Base.show(io::IO, lib::Library{<:ObjectHandle})
     println(io, repeat("  ", lib.level), "* ", lib.path)
