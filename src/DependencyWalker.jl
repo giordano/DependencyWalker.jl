@@ -14,7 +14,9 @@ end
 
 function Library(path::String, level::Int = 0)
     oh = try
-        readmeta(open(path, "r"))
+        # TODO: need to close `io`
+        io = open(path, "r")
+        readmeta(io)
     catch
         missing
     end
@@ -27,7 +29,7 @@ Library(path::String, nil::Missing, level::Int) =
 Library(path::AbstractString, handle, level) =
     Library(String(path), handle, level)
 
-function dependency_tree(oh::ObjectHandle, level)
+function dependency_tree(oh::ObjectHandle, level::Int; dlext::String = Libdl.dlext)
     # Get the list of needed libraries
     deps_names = keys(find_libraries(oh))
     # Get list of already dlopen'ed libraries
@@ -35,8 +37,15 @@ function dependency_tree(oh::ObjectHandle, level)
     # Initialise list of dependencies
     deps = Library[]
     for dep in deps_names
+        split_dep = split(dep, '.')
+        # Get rid of the soversion.  TODO: this is only for GNU/Linux and
+        # FreeBSD, no idea what we have to do for the other operating systems.
+        idx = findlast(isequal(dlext), split_dep)
+        if !isnothing(idx)
+            dep = join(split_dep[1:idx], '.')
+        end
         # Get the first dlopen'ed library matching the needed library, if any
-        idx = findfirst(d -> dep == basename(d), open_dls)
+        idx = findfirst(d -> occursin(dep, basename(d)), open_dls)
         if isnothing(idx)
             # Push a missing library to the list
             push!(deps, Library(dep, missing, level + 1))
