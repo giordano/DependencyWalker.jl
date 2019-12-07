@@ -1,7 +1,8 @@
 using DependencyWalker
 using Test
-using Pango_jll
+using ObjectFile, Pango_jll
 
 @testset "DependencyWalker.jl" begin
-    @test Library(Pango_jll.libpango_path) isa Library
+    @test Library(Pango_jll.libpango_path) isa Library{<:ObjectHandle}
+    @test Library("this does not exist.foo") isa Library{Missing}
 end

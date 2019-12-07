@@ -13,6 +13,10 @@ struct Library{OH<:Union{ObjectHandle,Missing}}
 end
 
 function Library(path::String, level::Int = 0)
+    if !isfile(path)
+        # TODO: should check also if it can be opened?
+        return Library(path, missing, level, Library[])
+    end
     io = open(path, "r")
     oh = try
         readmeta(io)
