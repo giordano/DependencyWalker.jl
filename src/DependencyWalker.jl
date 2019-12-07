@@ -41,7 +41,7 @@ function dependency_tree(oh::ObjectHandle, level)
             # Push a missing library to the list
             push!(deps, Library(dep, missing, level + 1))
         else
-            # Return the found library to the list
+            # Push the found library to the list
             push!(deps, Library(open_dls[idx], level + 1))
         end
     end
