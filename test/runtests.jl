@@ -1,6 +1,7 @@
 using DependencyWalker
 using Test
+using Pango_jll
 
 @testset "DependencyWalker.jl" begin
-    # Write your own tests here.
+    @test Library(Pango_jll.libpango_path) isa Library
 end
