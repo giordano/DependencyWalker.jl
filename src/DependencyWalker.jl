@@ -66,13 +66,14 @@ end
 dependency_tree(::Missing, level) = Library[]
 
 function Base.show(io::IO, lib::Library{<:ObjectHandle})
-    println(io, repeat("  ", lib.level), "* ", lib.path)
+    print(io, repeat("  ", lib.level), "* ", lib.path)
     for dep in lib.deps
+        println(io)
         show(io, dep)
     end
 end
 
 Base.show(io::IO, lib::Library{Missing}) =
-    printstyled(io, repeat("  ", lib.level), "* ", lib.path, " (NOT FOUND)\n", color = :yellow)
+    printstyled(io, repeat("  ", lib.level), "* ", lib.path, " (NOT FOUND)", color = :yellow)
 
 end # module
