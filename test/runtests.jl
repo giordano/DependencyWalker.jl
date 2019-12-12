@@ -1,3 +1,10 @@
+using BinaryProvider
+@show BinaryProvider.platform_key_abi()
+if VERSION >= v"1.3"
+    using Pkg
+    @show Pkg.BinaryPlatforms.platform_key_abi()
+end
+
 @info "Before loading SymEngine_jll..."
 using SymEngine_jll
 @info "After loading SymEngine_jll..."
