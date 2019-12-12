@@ -1,4 +1,6 @@
+@info "Before loading SymEngine_jll..."
 using SymEngine_jll
+@info "After loading SymEngine_jll..."
 
 # @testset "DependencyWalker.jl" begin
 #     @show SymEngine_jll.libsymengine_path
