@@ -107,4 +107,18 @@ function Base.show(io::IO, lib::Library{T}) where {T}
     end
 end
 
+
+function install_dlopen_hook()
+    using Libdl
+    Core.eval(Libdl, quote
+                  function dlopen(path, args...)
+                      try
+                          Libdl.dlopen(path, args....)
+                      catch
+                          Library(path)
+                      end
+                  end
+              end)
+end
+
 end # module
