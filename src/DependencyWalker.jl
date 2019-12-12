@@ -7,7 +7,7 @@ export Library
 
 struct Library{OH<:Union{ObjectHandle,Missing,Nothing}}
     path::String
-    handle::OH
+    handle_type::Type{OH}
     level::Int
     deps::Vector{Library}
 end
@@ -15,7 +15,7 @@ end
 function Library(path::String, level::Int = 0)
     if !isfile(path)
         # TODO: should check also if it can be opened?
-        return Library(path, missing, level, Library[])
+        return Library(path, Missing, level, Library[])
     end
     io = open(path, "r")
     oh = try
@@ -25,15 +25,16 @@ function Library(path::String, level::Int = 0)
         nothing
     end
     oh_new, deps = dependency_tree(oh, level)
+    lib = Library(path, typeof(oh_new), level, deps)
     isopen(io) && close(io)
-    return Library(path, oh_new, level, deps)
+    return lib
 end
 
-Library(path::String, oh::T, level::Int) where {T<:Union{Missing,Nothing}} =
-    Library{T}(path, oh, level, Library[])
+Library(path::String, oht::Type{T}, level::Int) where {T<:Union{Missing,Nothing}} =
+    Library{T}(path, oht, level, Library[])
 
-Library(path::AbstractString, handle, level) =
-    Library(String(path), handle, level)
+Library(path::AbstractString, oht, level) =
+    Library(String(path), oht, level)
 
 # Check if `lib` matches `open_lib`, one of the libraries currently loaded in
 # the system.  The condition to ignore the case is not quite accurate as this is
@@ -73,7 +74,7 @@ function dependency_tree(oh::ObjectHandle, level::Int; dlext::String = Libdl.dle
         idx = findfirst(d -> is_library_open(dep, d), open_dls)
         if isnothing(idx)
             # Push a missing library to the list
-            push!(deps, Library(dep, missing, level + 1))
+            push!(deps, Library(dep, Missing, level + 1))
         else
             # Push the found library to the list
             push!(deps, Library(open_dls[idx], level + 1))
