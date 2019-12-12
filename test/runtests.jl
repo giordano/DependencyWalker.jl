@@ -3,6 +3,7 @@ using Test
 using ObjectFile, Pango_jll
 
 @testset "DependencyWalker.jl" begin
+    @show Pango_jll.libpango_path
     @show readmeta(open(Pango_jll.libpango_path, "r"))
     pango = Library(Pango_jll.libpango_path)
     @show pango
