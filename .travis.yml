@@ -19,3 +19,7 @@ matrix:
   fast_finish: true
 notifications:
   email: false
+
+cache:
+  directories:
+    - $HOME/.julia/artifacts
