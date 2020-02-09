@@ -6,9 +6,9 @@ using ObjectFile, Pkg.BinaryPlatforms
 
 if Sys.iswindows()
     if haskey(ENV, "TRAVIS")
-        Library(raw"C:\Users\travis\.julia\artifacts\e177c77afc4dbd274277508bd5d069731bbe517e\bin\libspqr.dll")
+        @show Library(raw"C:\Users\travis\.julia\artifacts\e177c77afc4dbd274277508bd5d069731bbe517e\bin\libspqr.dll")
     else
-        Library(raw"C:\Users\appveyor\.julia\artifacts\e082284e0a29a950b24a5a1817e7eef7247ccb7c\bin\libspqr.dll")
+        @show Library(raw"C:\Users\appveyor\.julia\artifacts\e082284e0a29a950b24a5a1817e7eef7247ccb7c\bin\libspqr.dll")
     end
 end
 
