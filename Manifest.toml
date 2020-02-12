@@ -46,7 +46,7 @@ uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
 version = "0.3.7+5"
 
 [[Pkg]]
-deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "UUIDs"]
+deps = ["Dates", "LibGit2", "Libdl", "Logging", "Markdown", "Printf", "REPL", "Random", "SHA", "Test", "UUIDs"]
 uuid = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 
 [[Printf]]
@@ -84,11 +84,11 @@ version = "0.3.0"
 
 [[SuiteSparse_jll]]
 deps = ["Libdl", "OpenBLAS_jll", "Pkg"]
-git-tree-sha1 = "03dd0e690d333cfa731170bd4f3127caa42d8436"
-repo-rev = "master"
-repo-url = "https://github.com/giordano/SuiteSparse_jll.jl"
+git-tree-sha1 = "8952e3a9920cf2e9ac11ea2627a8778f84771838"
+repo-rev = "202ebf9db961644ad225cb53549dedc8f1df9453"
+repo-url = "https://github.com/JuliaBinaryWrappers/SuiteSparse_jll.jl.git"
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "5.4.0+5"
+version = "5.4.0+2"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
