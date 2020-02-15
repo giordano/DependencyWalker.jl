@@ -90,8 +90,8 @@ version = "0.3.0"
 
 [[SuiteSparse_jll]]
 deps = ["Libdl", "METIS_jll", "OpenBLAS_jll", "Pkg"]
-git-tree-sha1 = "94bf0ba4bbe6aff0769ff83b0088a85cc27aa5af"
-repo-rev = "94bf0ba4bbe6aff0769ff83b0088a85cc27aa5af"
+git-tree-sha1 = "95cd02d6a1edb7b7e6d50e0c9d8578455f1dc706"
+repo-rev = "203b95c6088dd6cffab798173d3e80b6e76935b6"
 repo-url = "https://github.com/giordano/SuiteSparse_jll.jl"
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
 version = "5.4.0+5"
