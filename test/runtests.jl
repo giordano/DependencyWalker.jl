@@ -3,7 +3,7 @@ using Test
 using ObjectFile, Pkg.BinaryPlatforms
 using SuiteSparse_jll
 
-@show Library(SuiteSparse_jll.libspqr_path)
+# @show Library(SuiteSparse_jll.libspqr_path)
 
 # @show platform_key_abi()
 

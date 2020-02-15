@@ -29,6 +29,12 @@ uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
 [[Logging]]
 uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
+[[METIS_jll]]
+deps = ["Libdl", "Pkg"]
+git-tree-sha1 = "1016c455c8f9b9ae871b4736b6e6596c6efe3dfd"
+uuid = "d00139f3-1899-568f-a2f0-47f597d42d70"
+version = "5.1.0+1"
+
 [[Markdown]]
 deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
@@ -83,12 +89,12 @@ uuid = "53d494c1-5632-5724-8f4c-31dff12d585f"
 version = "0.3.0"
 
 [[SuiteSparse_jll]]
-deps = ["Libdl", "OpenBLAS_jll", "Pkg"]
-git-tree-sha1 = "8952e3a9920cf2e9ac11ea2627a8778f84771838"
-repo-rev = "202ebf9db961644ad225cb53549dedc8f1df9453"
-repo-url = "https://github.com/JuliaBinaryWrappers/SuiteSparse_jll.jl.git"
+deps = ["Libdl", "METIS_jll", "OpenBLAS_jll", "Pkg"]
+git-tree-sha1 = "94bf0ba4bbe6aff0769ff83b0088a85cc27aa5af"
+repo-rev = "94bf0ba4bbe6aff0769ff83b0088a85cc27aa5af"
+repo-url = "https://github.com/giordano/SuiteSparse_jll.jl"
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
-version = "5.4.0+2"
+version = "5.4.0+5"
 
 [[Test]]
 deps = ["Distributed", "InteractiveUtils", "Logging", "Random"]
