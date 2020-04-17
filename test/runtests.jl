@@ -8,9 +8,9 @@ using libpng_jll
 using Fontconfig_jll
 using FreeType2_jll
 using Bzip2_jll
-# using Xorg_libXext_jll
 using Xorg_libX11_jll
-using Xorg_libXrender_jll
+# using Xorg_libXext_jll
+# using Xorg_libXrender_jll
 using LZO_jll
 using Zlib_jll
 
