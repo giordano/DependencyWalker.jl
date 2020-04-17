@@ -1,14 +1,24 @@
 using DependencyWalker
 using Test
-using ObjectFile, Pango_jll
+using ObjectFile
 
-@testset "DependencyWalker.jl" begin
-    pango = Library(Pango_jll.libpango_path)
-    @show pango
-    if Sys.islinux() && Sys.WORD_SIZE == 32
-        @test_broken pango isa Library{<:ObjectHandle}
-    else
-        @test pango isa Library{<:ObjectHandle}
-    end
-    @test Library("this does not exist.foo") isa Library{Missing}
-end
+using Glib_jll
+using Pixman_jll
+using libpng_jll
+using Fontconfig_jll
+using FreeType2_jll
+using Bzip2_jll
+using Xorg_libXext_jll
+using Xorg_libXrender_jll
+using LZO_jll
+using Zlib_jll
+
+using Xorg_libxcb_jll
+
+using Libdl
+
+@show dllist()
+
+println()
+
+@show Library(Xorg_libxcb_jll.libxcb_shm_path)
