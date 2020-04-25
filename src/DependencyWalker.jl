@@ -18,16 +18,16 @@ function Library(path::String, level::Int = 0)
         return Library(path, Missing, level, Library[])
     end
     io = open(path, "r")
-    oh = try
-        readmeta(io)
+    oh, deps_names = try
+        oh = readmeta(io)
+        # Get the list of needed libraries
+        oh, keys(find_libraries(oh))
     catch
-        close(io)
-        nothing
+        nothing, []
     end
-    oh_new, deps = dependency_tree(oh, level)
-    lib = Library(path, typeof(oh_new), level, deps)
-    isopen(io) && close(io)
-    return lib
+    close(io)
+    deps = dependency_tree(deps_names, level)
+    return Library(path, typeof(oh), level, deps)
 end
 
 Library(path::String, oht::Type{T}, level::Int) where {T<:Union{Missing,Nothing}} =
@@ -46,16 +46,9 @@ else
     is_library_open(lib, open_lib) = occursin(lib, open_lib)
 end
 
-function dependency_tree(oh::ObjectHandle, level::Int; dlext::String = Libdl.dlext)
+function dependency_tree(deps_names, level::Int; dlext::String = Libdl.dlext)
     # Initialise list of dependencies
     deps = Library[]
-    # Get the list of needed libraries
-    deps_names = try
-        keys(find_libraries(oh))
-    catch
-        # We've got an error while looking for the libraries.
-        return nothing, deps
-    end
     # Get list of already dlopen'ed libraries
     open_dls = Libdl.dllist()
     for dep in deps_names
@@ -80,10 +73,8 @@ function dependency_tree(oh::ObjectHandle, level::Int; dlext::String = Libdl.dle
             push!(deps, Library(open_dls[idx], level + 1))
         end
     end
-    return oh, deps
+    return deps
 end
-
-dependency_tree(oh::Union{Nothing,Missing}, level) = (oh, Library[])
 
 reduce_hash(x::UInt64) = Base.hash_64_32(x)
 reduce_hash(x::UInt32) = x
