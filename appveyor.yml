@@ -12,6 +12,9 @@ matrix:
   allow_failures:
   - julia_version: nightly
 
+cache:
+  - '%USERPROFILE%\.julia\artifacts'
+
 notifications:
   - provider: Email
     on_build_success: false
