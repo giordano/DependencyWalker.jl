@@ -12,12 +12,11 @@ libraries on your system.
 
 ## Installation
 
-This package is not registered, so you have to install it by specifing the URL
-address.  Enter the package manager mode in the REPL with the `]` key and run
-the command
+This package is registered, so you can install it by entering the package
+manager mode in the REPL with the `]` key and running the command
 
 ```
-add https://github.com/giordano/DependencyWalker.jl.git
+add DependencyWalker
 ```
 
 ## Usage
