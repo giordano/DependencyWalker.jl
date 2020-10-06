@@ -113,27 +113,7 @@ julia> Library(LibSSH2_jll.libssh2_path)
 ◼ /home/user/.julia/artifacts/26c7d3a6c17151277018b133ab0034e93ddc3d1e/lib/libssh2.so
   ◼ /usr/bin/../lib/julia/libmbedtls.so.12
     ◼ /usr/bin/../lib/julia/libmbedx509.so.0
-      ◼ /usr/bin/../lib/libc.so.6
-        ◼ /lib64/ld-linux-x86-64.so.2
-      ◼ /usr/bin/../lib/julia/libmbedcrypto.so.3
-        ◼ /usr/bin/../lib/libc.so.6
-          ◼ /lib64/ld-linux-x86-64.so.2
-    ◼ /usr/bin/../lib/libc.so.6
-      ◼ /lib64/ld-linux-x86-64.so.2
-    ◼ /usr/bin/../lib/julia/libmbedcrypto.so.3
-      ◼ /usr/bin/../lib/libc.so.6
-        ◼ /lib64/ld-linux-x86-64.so.2
-  ◼ /usr/bin/../lib/julia/libmbedx509.so.0
-    ◼ /usr/bin/../lib/libc.so.6
-      ◼ /lib64/ld-linux-x86-64.so.2
-    ◼ /usr/bin/../lib/julia/libmbedcrypto.so.3
-      ◼ /usr/bin/../lib/libc.so.6
-        ◼ /lib64/ld-linux-x86-64.so.2
-  ◼ /usr/bin/../lib/libc.so.6
-    ◼ /lib64/ld-linux-x86-64.so.2
-  ◼ /usr/bin/../lib/julia/libmbedcrypto.so.3
-    ◼ /usr/bin/../lib/libc.so.6
-      ◼ /lib64/ld-linux-x86-64.so.2
+...
 ```
 """
 DependencyWalker
