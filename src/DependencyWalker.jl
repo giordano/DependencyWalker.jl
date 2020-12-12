@@ -93,11 +93,13 @@ function Base.show(io::IO, lib::Library{T}; shownothing::Bool=false) where {T}
         symbol = "◼"
         extra_info = ""
     end
-    print(io, repeat("  ", lib.level), Crayon(foreground = reduce_hash(hash(lib.path))), symbol,
-          Crayon(reset=true), " ", lib.path, Crayon(foreground = :yellow), "$(extra_info)")
-    for dep in lib.deps
-        if !(T === Nothing && !shownothing)
+    if !(T === Nothing && !shownothing)
+        if lib.level > 0
             println(io)
+        end
+        print(io, repeat("  ", lib.level), Crayon(foreground = reduce_hash(hash(lib.path))), symbol,
+              Crayon(reset=true), " ", lib.path, Crayon(foreground = :yellow), "$(extra_info)")
+        for dep in lib.deps
             show(io, dep)
         end
     end
